@@ -20,7 +20,7 @@ export const ContactForm = () => {
 
   return (
     <FormWrap onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="text">Name</label>
+      <label htmlFor="name">Name</label>
       <input
         {...register('name', {
           required: 'Name is required field',
@@ -31,6 +31,7 @@ export const ContactForm = () => {
           },
         })}
         type="text"
+        id="name"
       />
       <div>{errors?.name && <p>{errors?.name?.message || 'Error'}</p>}</div>
 
@@ -46,6 +47,7 @@ export const ContactForm = () => {
           },
         })}
         type="tel"
+        id="number"
       />
       <div>{errors?.number && <p>{errors?.number?.message || 'Error'}</p>}</div>
       <FormButton type="submit">Add contact</FormButton>

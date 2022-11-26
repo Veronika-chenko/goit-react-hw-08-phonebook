@@ -1,7 +1,7 @@
 import { useAuth } from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
-import { LinkWrap } from 'components/AppBar/AppBar.styled';
+import { LinkWrap } from '../Navigation/Navigation.styled';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();

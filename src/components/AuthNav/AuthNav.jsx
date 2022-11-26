@@ -1,5 +1,5 @@
 // import { NavLink } from 'react-router-dom'; //not install
-import { LinkWrap, StyledLink } from 'components/AppBar/AppBar.styled';
+import { LinkWrap, StyledLink } from '../Navigation/Navigation.styled';
 
 export const AuthNav = () => {
   return (
