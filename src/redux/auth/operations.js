@@ -8,7 +8,7 @@ const setAuthHeader = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-// Utility t remove JWT
+// Utility to remove JWT
 const clearAuthHeader = () => {
     axios.defaults.headers.common.Authorization = '';
 };
@@ -23,7 +23,6 @@ export const singup = createAsyncThunk(
     async (credentials, thunkAPI) => { 
         try {
             const res = await axios.post("/users/signup", credentials);
-            console.log(res.data)
             setAuthHeader(res.data.token)
             return res.data;
         } catch (e) {
@@ -68,10 +67,8 @@ export const logOut = createAsyncThunk(
 // with localStorage "token":
 export const refreshUser = createAsyncThunk(
     'auth/refreshUser',
-    async (_, thunkAPI) => { 
-        // check: is token in redux state? //45:53
+    async (_, thunkAPI) => {
         const { token } = thunkAPI.getState().auth;
-        // console.log(token);
         if (!token) {
             return thunkAPI.rejectWithValue('No valid token')
         };

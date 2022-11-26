@@ -14,10 +14,7 @@ export const ContactForm = () => {
   } = useForm();
 
   const onSubmit = data => {
-    const name = data.name;
-    const number = data.tel;
-    // console.log(name, number);
-    dispatch(addContact({ name, number }));
+    dispatch(addContact(data));
     reset();
   };
 
@@ -36,18 +33,21 @@ export const ContactForm = () => {
         type="text"
       />
       <div>{errors?.name && <p>{errors?.name?.message || 'Error'}</p>}</div>
-      <label htmlFor="tel">Number</label>
+
+      <label htmlFor="number">Number</label>
       <input
-        {...register('tel', {
+        {...register('number', {
           required: 'Number is required field',
-          pattern:
-            /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-          message:
-            'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
+          pattern: {
+            value:
+              /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+            message:
+              'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
+          },
         })}
-        type="text"
+        type="tel"
       />
-      <div>{errors?.tel && <p>{errors?.tel?.message || 'Error'}</p>}</div>
+      <div>{errors?.number && <p>{errors?.number?.message || 'Error'}</p>}</div>
       <FormButton type="submit">Add contact</FormButton>
     </FormWrap>
   );
@@ -55,6 +55,9 @@ export const ContactForm = () => {
 
 // #1
 // pattern.value /regular expr/
+
+// #2 'name' & 'number' fields names is expected for backend
+// чи надійно їх передавати як просто data?
 
 // name
 // "Name may contains only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"

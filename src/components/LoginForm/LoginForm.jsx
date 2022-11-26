@@ -11,13 +11,7 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = data => {
-    dispatch(
-      logIn({
-        email: data.email,
-        password: data.password,
-      })
-    );
-    console.log(data);
+    dispatch(logIn(data));
     reset();
   };
 

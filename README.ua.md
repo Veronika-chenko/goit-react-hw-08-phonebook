@@ -28,6 +28,8 @@ axios.defaults.headers.common.Authorization);
 39:36 Refresh; не завжди працює two cases 45:56 в thunkAPI є доступ к state:
 thunkAPI.getState().auth;
 
+45:53 refreshUser; check: is token in redux state?
+
 52:28 Error if (!token) { return thunkAPI.rejectWithValue('No valid token') };
 якщо вийшли - нічого не було rejected; якщо token немає і просто зробити return
 -> він вважає, що fulfilled(типу return щось у promise) тому return

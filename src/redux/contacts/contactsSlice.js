@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact } from "./operations";
+import { fetchContacts, addContact, deleteContact, updateContact } from "./operations";
 import { reducer } from "./reducers";
 // 
 // import { persistReducer } from "redux-persist";
@@ -8,12 +8,13 @@ import { reducer } from "./reducers";
 
 const { fetchContactsSuccessReducer,
     addContactSuccessReducer,
-    deleteContactsSuccessReducer,
+    deleteContactSuccessReducer,
+    updateContactSuccessReducer,
     pendingReducer,
     rejectedReducer,
     fulfilledReducer } = reducer;
 
-const extraActions = [fetchContacts, addContact, deleteContact];
+const extraActions = [fetchContacts, addContact, deleteContact, updateContact];
 const getActions = type => isAnyOf(...extraActions.map(action => action[type]));
 
 const contactsSlice = createSlice({
@@ -22,12 +23,12 @@ const contactsSlice = createSlice({
         items: [],
         isLoading: false,
         error: null,
-        // showModal: false,
     },
     extraReducers: builder => builder
         .addCase(fetchContacts.fulfilled, fetchContactsSuccessReducer)
         .addCase(addContact.fulfilled, addContactSuccessReducer)
-        .addCase(deleteContact.fulfilled, deleteContactsSuccessReducer)
+        .addCase(deleteContact.fulfilled, deleteContactSuccessReducer)
+        .addCase(updateContact.fulfilled, updateContactSuccessReducer)
         .addMatcher(getActions("pending"), pendingReducer)
         .addMatcher(getActions("rejected"), rejectedReducer)
         .addMatcher(getActions("fulfilled"), fulfilledReducer)

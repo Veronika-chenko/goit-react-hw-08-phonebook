@@ -1,12 +1,5 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-// import { fetchContacts } from '../redux/contacts/operations';
-// import { selectIsLoading, selectError } from 'redux/contacts/selectors';
-// import { Form } from './Filter/Form';
-// import { Filter } from './Filter';
-// import { Contacts } from '../pages/Contacts';
-// import { TopTitle, Title, InfoText } from './App.styled';
-
 //
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom'; // not install

@@ -13,14 +13,7 @@ export const RegisterForm = () => {
   } = useForm();
 
   const onSubmit = data => {
-    dispatch(
-      singup({
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      })
-    );
-    // console.log(data);
+    dispatch(singup(data));
     reset();
   };
 
@@ -63,4 +56,4 @@ export const RegisterForm = () => {
   );
 };
 
-// 400 Bad Request //handle
+// 400 Bad Request //handle already exist

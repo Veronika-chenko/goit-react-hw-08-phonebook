@@ -5,11 +5,17 @@ export const reducer = {
     addContactSuccessReducer: (state, action) => {
         state.items.push(action.payload);
     },
-    deleteContactsSuccessReducer: (state, action) => {
+    deleteContactSuccessReducer: (state, action) => {
         const index = state.items.findIndex(
             contact => contact.id === action.payload.id
         );
         state.items.splice(index, 1);
+    },
+    updateContactSuccessReducer: (state, action) => {
+        const index = state.items.findIndex(
+            contact => contact.id === action.payload.id
+        );
+        state.items.splice(index, 1, action.payload);
     },
     pendingReducer: state => {
         state.isLoading = true;
