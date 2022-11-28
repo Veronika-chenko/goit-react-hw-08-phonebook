@@ -1,31 +1,22 @@
-import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { ModalBackdrop, ModalWrap } from './Modal.styled';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { updateContact } from 'redux/contacts/operations';
+import {
+  Button,
+  Input,
+  Modal,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
+  Stack,
+} from '@chakra-ui/react';
 
 const modalRoot = document.querySelector('#modal-root');
-
-export const Modal = ({ contact, onClose }) => {
+export const Modal1 = ({ props: { contact, isOpen, onClose } }) => {
   const { id, name, number } = contact;
   const dispatch = useDispatch();
-  // #1
-  useEffect(() => {
-    const handleKeyDown = e => {
-      if (e.code === 'Escape') onClose();
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
-
-  // #2
-  const handleBackdropClick = e => {
-    if (e.currentTarget === e.target) onClose();
-  };
 
   const {
     register,
@@ -46,12 +37,15 @@ export const Modal = ({ contact, onClose }) => {
   };
 
   return createPortal(
-    <ModalBackdrop onClick={handleBackdropClick}>
-      <ModalWrap>
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <Modal size="md" isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent p={3}>
+        <ModalCloseButton />
+        <Stack as="form" onSubmit={handleSubmit(onSubmit)}>
           <label>
             Name
-            <input
+            <Input
+              mt={3}
               {...register('name', {
                 required: 'Name is required field',
                 pattern: {
@@ -69,7 +63,8 @@ export const Modal = ({ contact, onClose }) => {
           {/*  */}
           <label>
             Number
-            <input
+            <Input
+              mt={3}
               {...register('number', {
                 required: 'Number is required field',
                 pattern:
@@ -84,14 +79,18 @@ export const Modal = ({ contact, onClose }) => {
           <div>
             {errors?.number && <p>{errors?.number?.message || 'Error'}</p>}
           </div>
-          <button type="submit">Update contact</button>
-        </form>
-      </ModalWrap>
-    </ModalBackdrop>,
+          <Button type="submit">Save</Button>
+        </Stack>
+      </ModalContent>
+    </Modal>,
     modalRoot
   );
 };
 
-Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
+Modal1.propTypes = {
+  props: PropTypes.shape({
+    contact: PropTypes.object.isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+  }),
 };

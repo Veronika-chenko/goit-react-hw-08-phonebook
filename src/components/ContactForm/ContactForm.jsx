@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { addContact } from 'redux/contacts/operations';
-import { FormWrap, FormButton } from './ContactForm.styled';
 import { useForm } from 'react-hook-form';
+import { Button, Input, Stack } from '@chakra-ui/react';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -19,9 +19,10 @@ export const ContactForm = () => {
   };
 
   return (
-    <FormWrap onSubmit={handleSubmit(onSubmit)}>
+    <Stack as="form" w="300px" mb={4} onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="name">Name</label>
-      <input
+      <Input
+        size="sm"
         {...register('name', {
           required: 'Name is required field',
           pattern: {
@@ -36,7 +37,8 @@ export const ContactForm = () => {
       <div>{errors?.name && <p>{errors?.name?.message || 'Error'}</p>}</div>
 
       <label htmlFor="number">Number</label>
-      <input
+      <Input
+        size="sm"
         {...register('number', {
           required: 'Number is required field',
           pattern: {
@@ -50,8 +52,10 @@ export const ContactForm = () => {
         id="number"
       />
       <div>{errors?.number && <p>{errors?.number?.message || 'Error'}</p>}</div>
-      <FormButton type="submit">Add contact</FormButton>
-    </FormWrap>
+      <Button size="sm" type="submit">
+        Add contact
+      </Button>
+    </Stack>
   );
 };
 

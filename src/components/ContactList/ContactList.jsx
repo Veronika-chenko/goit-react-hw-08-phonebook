@@ -1,16 +1,17 @@
+import { Flex } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { selectFilteredContacts } from 'redux/contacts/selectors';
 import { ContactItem } from '../ContactItem/ContactItem';
-import { ContactListWrap } from './ContactList.styled';
 
 export const ContactList = () => {
   const visibleContacts = useSelector(selectFilteredContacts);
 
   return (
-    <ContactListWrap>
+    <Flex as="ul" direction="column">
       {visibleContacts.map(contact => (
         <ContactItem key={contact.id} contact={contact}></ContactItem>
       ))}
-    </ContactListWrap>
+    </Flex>
   );
 };
+// display="inline-flex"

@@ -1,7 +1,7 @@
 import { useAuth } from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
-import { LinkWrap } from '../Navigation/Navigation.styled';
+import { Button, Flex, Text } from '@chakra-ui/react';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -10,11 +10,11 @@ export const UserMenu = () => {
   const handleLogOut = () => dispatch(logOut());
 
   return (
-    <LinkWrap>
-      <p>Welcome, {user.name}</p>
-      <button type="submit" onClick={handleLogOut}>
+    <Flex align="center" gap={5}>
+      <Text fontSize="lg">Welcome, {user.name}</Text>
+      <Button type="submit" onClick={handleLogOut}>
         Logout
-      </button>
-    </LinkWrap>
+      </Button>
+    </Flex>
   );
 };

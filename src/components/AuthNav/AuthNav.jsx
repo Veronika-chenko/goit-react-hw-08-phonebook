@@ -1,11 +1,15 @@
-// import { NavLink } from 'react-router-dom'; //not install
-import { LinkWrap, StyledLink } from '../Navigation/Navigation.styled';
+import { NavLink } from 'react-router-dom';
+import { Flex, Link } from '@chakra-ui/react';
 
 export const AuthNav = () => {
   return (
-    <LinkWrap>
-      <StyledLink to="/register">Register</StyledLink>
-      <StyledLink to="/login">Log in</StyledLink>
-    </LinkWrap>
+    <Flex gap={5}>
+      <Link as={NavLink} fontSize="lg" py={5} to="/register">
+        Register
+      </Link>
+      <Link as={NavLink} fontSize="lg" py={5} to="/login">
+        Log in
+      </Link>
+    </Flex>
   );
 };

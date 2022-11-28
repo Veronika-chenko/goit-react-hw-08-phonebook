@@ -1,29 +1,29 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteContact } from 'redux/contacts/operations';
-import { ContactDeleteButton, ContactItemWrap } from './ContactsItem.styled';
-import { Modal } from 'components/Modal/Modal';
+import { Modal1 } from 'components/Modal/Modal';
+import { Button, Flex, Stack } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 
 export const ContactItem = ({ contact }) => {
-  const [showModal, setShowModal] = useState(false);
   const { id, name, number } = contact;
   const dispatch = useDispatch();
-
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <ContactItemWrap>
+      <Flex as="li" align="center" gap={6} p={2}>
         {name}: {number}
-        <ContactDeleteButton onClick={() => dispatch(deleteContact(id))}>
-          Delete
-        </ContactDeleteButton>
-        <ContactDeleteButton onClick={toggleModal}>Update</ContactDeleteButton>
-      </ContactItemWrap>
-      {showModal && <Modal contact={contact} onClose={toggleModal} />}
+        <Stack spacing={4} direction="row">
+          <Button size="sm" onClick={() => dispatch(deleteContact(id))}>
+            Delete
+          </Button>
+          <Button size="sm" onClick={onOpen}>
+            Update
+          </Button>
+        </Stack>
+      </Flex>
+      <Modal1 props={{ contact, isOpen, onClose }} />
     </>
   );
 };
