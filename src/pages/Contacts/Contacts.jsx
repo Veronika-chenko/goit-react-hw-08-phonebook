@@ -1,11 +1,13 @@
-import { ContactList } from 'components/ContactList/ContactList';
-import { FilterContacts } from 'components/FilterContacts';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
-import { ContactForm } from 'components/ContactForm/ContactForm';
+import { Box, Heading } from '@chakra-ui/react';
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectIsLoading } from 'redux/contacts/selectors';
+
+import { ContactList } from 'components/ContactList';
+import { FilterContacts } from 'components/FilterContacts';
+import { ContactForm } from 'components/ContactForm';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -21,10 +23,15 @@ export default function Contacts() {
       <Helmet>
         <title>My Contacts</title>
       </Helmet>
+      <Heading as="h1" mb={5}>
+        My Contacts
+      </Heading>
       <ContactForm />
-      <FilterContacts />
-      <div>{isLoading && 'Request in progress...'}</div>
-      <ContactList />
+      <Box>
+        <FilterContacts />
+        <div>{isLoading && 'Request in progress...'}</div>
+        <ContactList />
+      </Box>
     </>
   );
 }

@@ -1,27 +1,34 @@
-// import { NavLink } from 'react-router-dom';
 import { useAuth } from 'hooks/useAuth';
-// import { StyledLink } from 'components/AppBar/AppBar.styled'; //NavLink
-import { AuthNav } from 'components/AuthNav/AuthNav';
-import { UserMenu } from 'components/UserMenu/UserMenu';
-import { Nav, StyledLink } from './Navigation.styled';
+import { AuthNav } from 'components/AuthNav';
+import { UserMenu } from 'components/UserMenu';
+import { ThemeToggler } from 'components/ThemeToggler';
+import { Box, Container, Flex, Text } from '@chakra-ui/react';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
 
   return (
-    <Nav>
-      {!isLoggedIn && (
-        <>
-          <p>Welcome to PhoneBook</p>
-          <AuthNav />
-        </>
-      )}
-      {isLoggedIn && (
-        <>
-          <StyledLink to="/contacts">Contacts</StyledLink>
-          <UserMenu />
-        </>
-      )}
-    </Nav>
+    <Box as="header">
+      <Container maxW="container.xl">
+        <Flex justify="space-between" align="center">
+          <Flex gap={4} align="center">
+            <Text as="h2" fontSize="xl" fontWeight="700">
+              Welcome to PhoneBook
+            </Text>
+            <ThemeToggler />
+          </Flex>
+          {!isLoggedIn && (
+            <Flex justify="space-between" align="center">
+              <AuthNav />
+            </Flex>
+          )}
+          {isLoggedIn && (
+            <Flex gap={4} align="center">
+              <UserMenu />
+            </Flex>
+          )}
+        </Flex>
+      </Container>
+    </Box>
   );
 };
