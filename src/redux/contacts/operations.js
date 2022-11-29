@@ -1,18 +1,11 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// axios.defaults.baseURL = "https://637bddee6f4024eac219dde5.mockapi.io";
-// axios.defaults.baseURL = "https://connections-api.herokuapp.com";
-
-// https://connections-api.herokuapp.com/
-
 export const fetchContacts = createAsyncThunk(
-    // action type:
-    "contacts/fetchAll", // -> "contacts/fetchAll/postfixes" (pfx: pending,fulfilled,rejected)
-    // function to make HTTP req and return a promise data(payload):
-    async (_, thunkAPI) => { //payloadCreator fn
+    "contacts/fetchAll",
+    async (_, thunkAPI) => {
     try {
-        const res = await axios.get("/contacts"); //data(payload)
+        const res = await axios.get("/contacts");
         return res.data; 
     } catch (e) {
         return thunkAPI.rejectWithValue(e.message);

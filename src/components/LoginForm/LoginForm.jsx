@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
 import { useForm } from 'react-hook-form';
+import { logIn } from 'redux/auth/operations';
+
 import {
   Stack,
   Input,
@@ -8,20 +10,24 @@ import {
   Button,
   Text,
   Box,
-  // Icon,
   InputLeftElement,
-  // InputRightElement,
   InputGroup,
+  InputRightElement,
 } from '@chakra-ui/react';
+
 import {
   AiOutlineMail,
   AiFillLock,
-  // AiOutlineEye,
-  // AiOutlineEyeInvisible,
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
 } from 'react-icons/ai';
 
 export const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const dispatch = useDispatch();
+  const handlePasswordVisibility = () => setShowPassword(!showPassword);
+
   const {
     register,
     handleSubmit,
@@ -35,10 +41,17 @@ export const LoginForm = () => {
 
   return (
     <Flex justify="center" align="canter">
-      <Flex justify="center" align="canter" direction="column" w="400px">
+      <Flex
+        pos="relative"
+        justify="center"
+        align="canter"
+        direction="column"
+        w="400px"
+      >
         <Text as="h1" align="center" fontWeight="700" fontSize="24px" mb={4}>
           Log in
         </Text>
+
         <Stack as="form" gap={3} onSubmit={handleSubmit(onSubmit)}>
           <Box pos="relative">
             <Text as="label" htmlFor="email">
@@ -46,7 +59,9 @@ export const LoginForm = () => {
             </Text>
             <InputGroup mt={2}>
               <Input
-                {...register('email', { required: 'Email is required field' })}
+                {...register('email', {
+                  required: 'Email is required',
+                })}
                 id="email"
                 type="email"
               />
@@ -74,19 +89,32 @@ export const LoginForm = () => {
             <InputGroup mt={2}>
               <Input
                 {...register('password', {
-                  required: 'Password is required field',
+                  required: 'Password is required',
                   minLength: {
                     value: 7,
                     message: 'Min length is 7',
                   },
                 })}
                 id="password"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
               />
               <InputLeftElement
                 pointerEvents="none"
                 children={<AiFillLock color="gray.300" />}
               />
+              <InputRightElement>
+                <Button
+                  background="transparent"
+                  p="0"
+                  w="100%"
+                  aria-label="Show hide password"
+                  _hover={{ bg: 'transparent' }}
+                  _focus={{ bg: 'transparent' }}
+                  onClick={handlePasswordVisibility}
+                >
+                  {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                </Button>
+              </InputRightElement>
             </InputGroup>
             <Box pos="absolute">
               {errors?.password && (
@@ -106,5 +134,3 @@ export const LoginForm = () => {
     </Flex>
   );
 };
-
-// 400 Bad Request //handle

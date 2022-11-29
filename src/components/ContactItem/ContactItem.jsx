@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteContact } from 'redux/contacts/operations';
-import { Modal1 } from 'components/Modal/Modal';
-import { Button, Flex, Stack } from '@chakra-ui/react';
-import { useDisclosure } from '@chakra-ui/react';
+import { ModalEdit } from 'components/Modal/Modal';
+import { useDisclosure, Box, Button, Flex, Text } from '@chakra-ui/react';
+import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 
 export const ContactItem = ({ contact }) => {
   const { id, name, number } = contact;
@@ -12,18 +12,40 @@ export const ContactItem = ({ contact }) => {
 
   return (
     <>
-      <Flex as="li" align="center" gap={6} p={2}>
-        {name}: {number}
-        <Stack spacing={4} direction="row">
-          <Button size="sm" onClick={() => dispatch(deleteContact(id))}>
-            Delete
+      <Flex
+        as="li"
+        justify="space-between"
+        align="center"
+        gap={6}
+        w="300px"
+        p={3}
+        borderRadius="16px"
+        boxShadow="0px 4px 18px -2px #c3d0dd"
+      >
+        <Box>
+          <Text fontSize="18px" fontWeight="600">
+            {name}
+          </Text>
+          <Text>{number}</Text>
+        </Box>
+        <Flex gap={3}>
+          <Button
+            size="sm"
+            borderRadius="70% 30% 56% 44% / 44% 61% 39% 56%"
+            onClick={() => dispatch(deleteContact(id))}
+          >
+            <AiOutlineDelete />
           </Button>
-          <Button size="sm" onClick={onOpen}>
-            Update
+          <Button
+            size="sm"
+            borderRadius="28% 72% 52% 48% / 44% 53% 47% 56%"
+            onClick={onOpen}
+          >
+            <AiOutlineEdit />
           </Button>
-        </Stack>
+        </Flex>
       </Flex>
-      <Modal1 props={{ contact, isOpen, onClose }} />
+      <ModalEdit props={{ contact, isOpen, onClose }} />
     </>
   );
 };

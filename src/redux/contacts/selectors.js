@@ -14,5 +14,3 @@ export const selectFilteredContacts = state => {
         contact.name.toLowerCase().includes(normalizedFilter)
     );
 };
-
-// export const selectShowModal = state => state.contact.showModal;

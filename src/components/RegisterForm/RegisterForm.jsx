@@ -1,13 +1,8 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { singup } from 'redux/auth/operations';
 import { useForm } from 'react-hook-form';
-import {
-  AiOutlineUser,
-  AiOutlineMail,
-  AiFillLock,
-  // AiOutlineEye,
-  // AiOutlineEyeInvisible,
-} from 'react-icons/ai';
+import { singup } from 'redux/auth/operations';
+
 import {
   Stack,
   Input,
@@ -15,16 +10,24 @@ import {
   Button,
   Text,
   Box,
-  // Icon,
   InputLeftElement,
   InputRightElement,
   InputGroup,
+  Heading,
+  FormControl,
+  FormLabel,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+
+import {
+  AiOutlineUser,
+  AiOutlineMail,
+  AiFillLock,
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+} from 'react-icons/ai';
 
 export const RegisterForm = () => {
-  const [type, setType] = useState('password');
-  // const [icon, setIcon] = useState(AiOutlineEyeInvisible);
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const {
     register,
@@ -38,31 +41,29 @@ export const RegisterForm = () => {
     reset();
   };
 
-  const showPwd = () => {
-    if (type === 'password') {
-      setType('text');
-    } else {
-      setType('password');
-    }
-  };
+  const handlePasswordVisibility = () => setShowPassword(!showPassword);
 
   return (
     <Flex justify="center" align="canter">
-      <Flex justify="center" align="canter" direction="column" w="400px">
-        <Text as="h1" align="center" fontWeight="700" fontSize="24px" mb={4}>
+      <Flex
+        pos="relative"
+        justify="center"
+        align="canter"
+        direction="column"
+        w="400px"
+      >
+        <Heading as="h1" align="center" fontWeight="700" fontSize="24px" mb={4}>
           Sign up
-        </Text>
+        </Heading>
+
         <Stack as="form" gap={3} onSubmit={handleSubmit(onSubmit)}>
-          <Box pos="relative">
-            <Text as="label" htmlFor="name">
-              Username
-            </Text>
-            <InputGroup mt={2}>
+          <FormControl pos="relative">
+            <FormLabel mb={2}>Username</FormLabel>
+            <InputGroup>
               <Input
                 {...register('name', {
-                  required: 'Username is required field',
+                  required: 'Username is required',
                 })}
-                id="name"
                 type="text"
               />
               <InputLeftElement
@@ -81,15 +82,12 @@ export const RegisterForm = () => {
                 </Text>
               )}
             </Box>
-          </Box>
-          <Box pos="relative">
-            <Text as="label" htmlFor="email" mb={2}>
-              Email
-            </Text>
-            <InputGroup mt={2}>
+          </FormControl>
+          <FormControl pos="relative">
+            <FormLabel mb={2}>Email</FormLabel>
+            <InputGroup>
               <Input
-                {...register('email', { required: 'Email is required field' })}
-                id="email"
+                {...register('email', { required: 'Email is required' })}
                 type="email"
               />
               <InputLeftElement
@@ -108,22 +106,19 @@ export const RegisterForm = () => {
                 </Text>
               )}
             </Box>
-          </Box>
-          <Box pos="relative">
-            <Text as="label" htmlFor="password" mb={2}>
-              Password
-            </Text>
-            <InputGroup mt={2}>
+          </FormControl>
+          <FormControl pos="relative">
+            <FormLabel mb={2}>Password</FormLabel>
+            <InputGroup>
               <Input
                 {...register('password', {
-                  required: 'Password is required field',
+                  required: 'Password is required',
                   minLength: {
                     value: 7,
                     message: 'Min length is 7',
                   },
                 })}
-                id="password"
-                type={type}
+                type={showPassword ? 'text' : 'password'}
               />
               <InputLeftElement
                 pointerEvents="none"
@@ -132,9 +127,15 @@ export const RegisterForm = () => {
               <InputRightElement>
                 <Button
                   background="transparent"
-                  size="sm"
-                  onClick={showPwd}
-                ></Button>
+                  p="0"
+                  w="100%"
+                  aria-label="Show hide password"
+                  _hover={{ bg: 'transparent' }}
+                  _focus={{ bg: 'transparent' }}
+                  onClick={handlePasswordVisibility}
+                >
+                  {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                </Button>
               </InputRightElement>
             </InputGroup>
             <Box pos="absolute">
@@ -148,8 +149,8 @@ export const RegisterForm = () => {
                 </Text>
               )}
             </Box>
-          </Box>
-          <Button type="submit">Register</Button>
+          </FormControl>
+          <Button type="submit">Sign up</Button>
         </Stack>
       </Flex>
     </Flex>

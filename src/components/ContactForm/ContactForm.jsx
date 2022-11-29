@@ -1,7 +1,16 @@
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contacts/operations';
 import { useForm } from 'react-hook-form';
-import { Button, Input, Stack } from '@chakra-ui/react';
+import { addContact } from 'redux/contacts/operations';
+
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -19,43 +28,69 @@ export const ContactForm = () => {
   };
 
   return (
-    <Stack as="form" w="300px" mb={4} onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="name">Name</label>
-      <Input
-        size="sm"
-        {...register('name', {
-          required: 'Name is required field',
-          pattern: {
-            value: /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-            message:
-              'Name may contains only letters, apostrophe, dash and spaces.',
-          },
-        })}
-        type="text"
-        id="name"
-      />
-      <div>{errors?.name && <p>{errors?.name?.message || 'Error'}</p>}</div>
-
-      <label htmlFor="number">Number</label>
-      <Input
-        size="sm"
-        {...register('number', {
-          required: 'Number is required field',
-          pattern: {
-            value:
-              /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-            message:
-              'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
-          },
-        })}
-        type="tel"
-        id="number"
-      />
-      <div>{errors?.number && <p>{errors?.number?.message || 'Error'}</p>}</div>
-      <Button size="sm" type="submit">
-        Add contact
-      </Button>
-    </Stack>
+    <Box>
+      <Stack as="form" gap={3} mb={4} onSubmit={handleSubmit(onSubmit)}>
+        <FormControl pos="relative">
+          <FormLabel>Name</FormLabel>
+          <Input
+            size="sm"
+            w="300px"
+            {...register('name', {
+              required: 'Name is required',
+              pattern: {
+                value:
+                  /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+                message:
+                  'Name may contains only letters, apostrophe, dash and spaces.',
+              },
+            })}
+            type="text"
+          />
+          <Box position="absolute">
+            {errors?.name && (
+              <Text
+                fontSize="xs"
+                color="#ff001b"
+                textShadow="rgb(0 0 0 / 25%) 0px 2px 2px"
+              >
+                {errors?.name?.message || 'Error'}
+              </Text>
+            )}
+          </Box>
+        </FormControl>
+        <FormControl pos="relative">
+          <FormLabel>Number</FormLabel>
+          <Input
+            size="sm"
+            w="300px"
+            {...register('number', {
+              required: 'Number is required',
+              pattern: {
+                value:
+                  /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+                message:
+                  'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
+              },
+            })}
+            type="tel"
+          />
+          <Box position="absolute">
+            {errors?.number && (
+              <Text
+                fontSize="xs"
+                color="#ff001b"
+                textShadow="rgb(0 0 0 / 25%) 0px 2px 2px"
+              >
+                {errors?.number?.message || 'Error'}
+              </Text>
+            )}
+          </Box>
+        </FormControl>
+        <Button size="sm" w="300px" type="submit">
+          Add contact
+        </Button>
+      </Stack>
+    </Box>
   );
 };
 

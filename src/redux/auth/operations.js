@@ -13,11 +13,6 @@ const clearAuthHeader = () => {
     axios.defaults.headers.common.Authorization = '';
 };
 
-// info below is token from backend:
-// POST @ /user/signup
-// body: {name, email, password}
-// credentials - {} з інфою, яку ввів користувач(from form)
-
 export const singup = createAsyncThunk(
     'auth/register',
     async (credentials, thunkAPI) => { 
@@ -26,13 +21,10 @@ export const singup = createAsyncThunk(
             setAuthHeader(res.data.token)
             return res.data;
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message);
+            return thunkAPI.rejectWithValue('User is already exists');
         }
     }
 );
-
-// POST @ /user/login
-// body: {name,password}
 
 export const logIn = createAsyncThunk(
     'auth/login',
@@ -42,13 +34,10 @@ export const logIn = createAsyncThunk(
             setAuthHeader(res.data.token)
             return res.data;
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message);
+            return thunkAPI.rejectWithValue('Invalid username or password');
         }
     }
 );
-
-// POST @ /user/logout
-// headers: Authorization: Bearer token
 
 export const logOut = createAsyncThunk(
     'auth/logout',
@@ -62,9 +51,6 @@ export const logOut = createAsyncThunk(
     }
 );
 
-// GET @ /user/current
-// headers: Authorization: Bearer token
-// with localStorage "token":
 export const refreshUser = createAsyncThunk(
     'auth/refreshUser',
     async (_, thunkAPI) => {
@@ -82,6 +68,3 @@ export const refreshUser = createAsyncThunk(
         }
     }
 );
-
-
-// передаємо в Authorization-header - для послед запросов
