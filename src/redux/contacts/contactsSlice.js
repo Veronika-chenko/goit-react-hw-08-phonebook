@@ -1,10 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact, updateContact } from "./operations";
 import { reducer } from "./reducers";
-// 
-// import { persistReducer } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
-// 
 
 const { fetchContactsSuccessReducer,
     addContactSuccessReducer,
@@ -35,6 +31,3 @@ const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
-
-// export const { addContact, deleteContact } = contactsSlice.actions;
-// export const contactsReducer = persistReducer(persistConfig, contactsSlice.reducer);

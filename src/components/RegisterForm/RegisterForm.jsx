@@ -14,7 +14,6 @@ import {
   InputRightElement,
   InputGroup,
   Heading,
-  FormControl,
   FormLabel,
 } from '@chakra-ui/react';
 
@@ -56,22 +55,24 @@ export const RegisterForm = () => {
           Sign up
         </Heading>
 
-        <Stack as="form" gap={3} onSubmit={handleSubmit(onSubmit)}>
-          <FormControl pos="relative">
-            <FormLabel mb={2}>Username</FormLabel>
-            <InputGroup>
-              <Input
-                {...register('name', {
-                  required: 'Username is required',
-                })}
-                type="text"
-              />
-              <InputLeftElement
-                pointerEvents="none"
-                children={<AiOutlineUser color="gray.300" />}
-              />
-            </InputGroup>
-            <Box position="absolute">
+        <Stack as="form" gap={1} onSubmit={handleSubmit(onSubmit)}>
+          <Box pos="relative">
+            <FormLabel>
+              Username
+              <InputGroup mt={2}>
+                <Input
+                  {...register('name', {
+                    required: 'Username is required',
+                  })}
+                  type="text"
+                />
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={<AiOutlineUser color="gray.300" />}
+                />
+              </InputGroup>
+            </FormLabel>
+            <Box position="absolute" top="90%">
               {errors?.name && (
                 <Text
                   fontSize="xs"
@@ -82,20 +83,22 @@ export const RegisterForm = () => {
                 </Text>
               )}
             </Box>
-          </FormControl>
-          <FormControl pos="relative">
-            <FormLabel mb={2}>Email</FormLabel>
-            <InputGroup>
-              <Input
-                {...register('email', { required: 'Email is required' })}
-                type="email"
-              />
-              <InputLeftElement
-                pointerEvents="none"
-                children={<AiOutlineMail color="gray.300" />}
-              />
-            </InputGroup>
-            <Box position="absolute">
+          </Box>
+          <Box pos="relative">
+            <FormLabel>
+              Email
+              <InputGroup mt={2}>
+                <Input
+                  {...register('email', { required: 'Email is required' })}
+                  type="email"
+                />
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={<AiOutlineMail color="gray.300" />}
+                />
+              </InputGroup>
+            </FormLabel>
+            <Box position="absolute" top="90%">
               {errors?.email && (
                 <Text
                   fontSize="xs"
@@ -106,39 +109,45 @@ export const RegisterForm = () => {
                 </Text>
               )}
             </Box>
-          </FormControl>
-          <FormControl pos="relative">
-            <FormLabel mb={2}>Password</FormLabel>
-            <InputGroup>
-              <Input
-                {...register('password', {
-                  required: 'Password is required',
-                  minLength: {
-                    value: 7,
-                    message: 'Min length is 7',
-                  },
-                })}
-                type={showPassword ? 'text' : 'password'}
-              />
-              <InputLeftElement
-                pointerEvents="none"
-                children={<AiFillLock color="gray.300" />}
-              />
-              <InputRightElement>
-                <Button
-                  background="transparent"
-                  p="0"
-                  w="100%"
-                  aria-label="Show hide password"
-                  _hover={{ bg: 'transparent' }}
-                  _focus={{ bg: 'transparent' }}
-                  onClick={handlePasswordVisibility}
-                >
-                  {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-                </Button>
-              </InputRightElement>
-            </InputGroup>
-            <Box pos="absolute">
+          </Box>
+          <Box pos="relative">
+            <FormLabel>
+              Password
+              <InputGroup mt={2}>
+                <Input
+                  {...register('password', {
+                    required: 'Password is required',
+                    minLength: {
+                      value: 7,
+                      message: 'Min length is 7',
+                    },
+                  })}
+                  type={showPassword ? 'text' : 'password'}
+                />
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={<AiFillLock color="gray.300" />}
+                />
+                <InputRightElement>
+                  <Button
+                    background="transparent"
+                    p="0"
+                    w="100%"
+                    aria-label="Show hide password"
+                    _hover={{ bg: 'transparent' }}
+                    _focus={{ bg: 'transparent' }}
+                    onClick={handlePasswordVisibility}
+                  >
+                    {showPassword ? (
+                      <AiOutlineEye />
+                    ) : (
+                      <AiOutlineEyeInvisible />
+                    )}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormLabel>
+            <Box pos="absolute" top="90%">
               {errors?.password && (
                 <Text
                   fontSize="xs"
@@ -149,12 +158,10 @@ export const RegisterForm = () => {
                 </Text>
               )}
             </Box>
-          </FormControl>
+          </Box>
           <Button type="submit">Sign up</Button>
         </Stack>
       </Flex>
     </Flex>
   );
 };
-
-// 400 Bad Request //handle already exist
