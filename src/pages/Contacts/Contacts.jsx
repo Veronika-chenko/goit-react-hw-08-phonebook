@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading, Spinner } from '@chakra-ui/react';
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectIsLoading } from 'redux/contacts/selectors';
 
@@ -20,16 +19,15 @@ export default function Contacts() {
 
   return (
     <>
-      <Helmet>
-        <title>My Contacts</title>
-      </Helmet>
       <Heading as="h1" mb={5}>
         My Contacts
       </Heading>
       <ContactForm />
       <Box>
         <FilterContacts />
-        <div>{isLoading && 'Request in progress...'}</div>
+        <Flex justify="center" w="300px" mb={2}>
+          {isLoading && <Spinner color="gray.300" />}
+        </Flex>
         <ContactList />
       </Box>
     </>

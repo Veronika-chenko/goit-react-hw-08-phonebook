@@ -2,15 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { addContact } from 'redux/contacts/operations';
 
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, FormLabel, Input, Stack, Text } from '@chakra-ui/react';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -30,7 +22,7 @@ export const ContactForm = () => {
   return (
     <Box>
       <Stack as="form" gap={3} mb={4} onSubmit={handleSubmit(onSubmit)}>
-        <FormControl pos="relative">
+        <Box pos="relative">
           <FormLabel>Name</FormLabel>
           <Input
             size="sm"
@@ -57,8 +49,8 @@ export const ContactForm = () => {
               </Text>
             )}
           </Box>
-        </FormControl>
-        <FormControl pos="relative">
+        </Box>
+        <Box pos="relative">
           <FormLabel>Number</FormLabel>
           <Input
             size="sm"
@@ -85,7 +77,7 @@ export const ContactForm = () => {
               </Text>
             )}
           </Box>
-        </FormControl>
+        </Box>
         <Button size="sm" w="300px" type="submit">
           Add contact
         </Button>
@@ -93,12 +85,3 @@ export const ContactForm = () => {
     </Box>
   );
 };
-
-// #1
-// pattern.value /regular expr/
-
-// #2 'name' & 'number' fields names is expected for backend
-// чи надійно їх передавати як просто data?
-
-// name
-// "Name may contains only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"

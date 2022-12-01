@@ -1,14 +1,13 @@
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteContact } from 'redux/contacts/operations';
-import { ModalEdit } from 'components/Modal/Modal';
+import { ModalEdit } from 'components/ModalEdit';
+import { ModalDelete } from 'components/ModalDelete';
 import { useDisclosure, Box, Button, Flex, Text } from '@chakra-ui/react';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 
 export const ContactItem = ({ contact }) => {
-  const { id, name, number } = contact;
-  const dispatch = useDispatch();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { name, number } = contact;
+  const editModalHandler = useDisclosure();
+  const deleteModalHandler = useDisclosure();
 
   return (
     <>
@@ -32,20 +31,21 @@ export const ContactItem = ({ contact }) => {
           <Button
             size="sm"
             borderRadius="70% 30% 56% 44% / 44% 61% 39% 56%"
-            onClick={() => dispatch(deleteContact(id))}
+            onClick={deleteModalHandler.onOpen}
           >
             <AiOutlineDelete />
           </Button>
           <Button
             size="sm"
             borderRadius="28% 72% 52% 48% / 44% 53% 47% 56%"
-            onClick={onOpen}
+            onClick={editModalHandler.onOpen}
           >
             <AiOutlineEdit />
           </Button>
         </Flex>
       </Flex>
-      <ModalEdit props={{ contact, isOpen, onClose }} />
+      <ModalEdit props={{ contact, modalHandler: editModalHandler }} />
+      <ModalDelete props={{ contact, modalHandler: deleteModalHandler }} />
     </>
   );
 };
