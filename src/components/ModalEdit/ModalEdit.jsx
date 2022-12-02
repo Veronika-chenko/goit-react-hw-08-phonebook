@@ -22,7 +22,7 @@ import { AiOutlineUser, AiOutlinePhone } from 'react-icons/ai';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export const ModalEdit = ({ props: { contact, modalHandler } }) => {
+export const ModalEdit = ({ contact, modalHandler }) => {
   const dispatch = useDispatch();
   const { id, name, number } = contact;
   const { isOpen, onClose } = modalHandler;
@@ -128,8 +128,6 @@ export const ModalEdit = ({ props: { contact, modalHandler } }) => {
 };
 
 ModalEdit.propTypes = {
-  props: PropTypes.shape({
-    contact: PropTypes.object.isRequired,
-    modalHandler: PropTypes.object.isRequired,
-  }),
+  contact: PropTypes.object.isRequired,
+  modalHandler: PropTypes.object.isRequired,
 };

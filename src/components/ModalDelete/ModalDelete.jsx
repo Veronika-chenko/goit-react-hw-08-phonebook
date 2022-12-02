@@ -15,7 +15,7 @@ import {
 
 const modalRoot = document.querySelector('#modal-root');
 
-export const ModalDelete = ({ props: { contact, modalHandler } }) => {
+export const ModalDelete = ({ contact, modalHandler }) => {
   const dispatch = useDispatch();
   const { id, name } = contact;
   const { isOpen, onClose } = modalHandler;
@@ -41,8 +41,6 @@ export const ModalDelete = ({ props: { contact, modalHandler } }) => {
 };
 
 ModalDelete.propTypes = {
-  props: PropTypes.shape({
-    contact: PropTypes.object.isRequired,
-    modalHandler: PropTypes.object.isRequired,
-  }),
+  contact: PropTypes.object.isRequired,
+  modalHandler: PropTypes.object.isRequired,
 };

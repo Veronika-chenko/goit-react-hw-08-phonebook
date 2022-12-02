@@ -44,8 +44,12 @@ export const ContactItem = ({ contact }) => {
           </Button>
         </Flex>
       </Flex>
-      <ModalEdit props={{ contact, modalHandler: editModalHandler }} />
-      <ModalDelete props={{ contact, modalHandler: deleteModalHandler }} />
+      {editModalHandler.isOpen && (
+        <ModalEdit contact={contact} modalHandler={editModalHandler} />
+      )}
+      {deleteModalHandler.isOpen && (
+        <ModalDelete contact={contact} modalHandler={deleteModalHandler} />
+      )}
     </>
   );
 };
