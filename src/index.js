@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
           <ColorModeProvider>
-            <BrowserRouter basename='/goit-react-hw-08-phonebook'>
+            <BrowserRouter basename='/phonebook-react-app'>
               <App />
             </BrowserRouter>
           </ColorModeProvider>
