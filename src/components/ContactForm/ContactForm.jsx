@@ -20,8 +20,8 @@ export const ContactForm = () => {
   };
 
   return (
-    <Box>
-      <Stack as="form" gap={3} mb={4} onSubmit={handleSubmit(onSubmit)}>
+    <Box> 
+      <Stack width={300} as="form" gap={3} mb={4} onSubmit={handleSubmit(onSubmit)}>
         <Box pos="relative">
           <FormLabel>Name</FormLabel>
           <Input
@@ -30,15 +30,17 @@ export const ContactForm = () => {
             {...register('name', {
               required: 'Name is required',
               pattern: {
-                value:
-                  /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-                message:
-                  'Name may contains only letters, apostrophe, dash and spaces.',
+                value: /^[a-z A-Z]*$/,
+                message: 'Name must be letters'
+              },
+              minLength: {
+                value: 2,
+                message: 'Name should be at least 2 characters'
               },
             })}
             type="text"
           />
-          <Box position="absolute">
+          <Box position="absolute" bottom={-5}>
             {errors?.name && (
               <Text
                 fontSize="xs"
@@ -61,12 +63,12 @@ export const ContactForm = () => {
                 value:
                   /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
                 message:
-                  'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
+                  'Number must be digits and at least 4 characters',
               },
             })}
             type="tel"
           />
-          <Box position="absolute">
+          <Box position="absolute" bottom={-5}>
             {errors?.number && (
               <Text
                 fontSize="xs"

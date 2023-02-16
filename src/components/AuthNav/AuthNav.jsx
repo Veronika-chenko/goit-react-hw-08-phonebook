@@ -22,7 +22,7 @@ export const AuthNav = () => {
         _hover={{ boxShadow: '0px 4px 18px -2px #c3d0dd' }}
         to="/login"
       >
-        Log in
+        Sing in
       </Button>
     </Flex>
   );

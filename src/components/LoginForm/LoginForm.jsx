@@ -49,7 +49,7 @@ export const LoginForm = () => {
         w="400px"
       >
         <Text as="h1" align="center" fontWeight="700" fontSize="24px" mb={4}>
-          Log in
+          Sign in
         </Text>
 
         <Stack as="form" gap={3} onSubmit={handleSubmit(onSubmit)}>
@@ -128,7 +128,7 @@ export const LoginForm = () => {
               )}
             </Box>
           </Box>
-          <Button type="submit">Log In</Button>
+          <Button type="submit">Sign In</Button>
         </Stack>
       </Flex>
     </Flex>
