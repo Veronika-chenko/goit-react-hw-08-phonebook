@@ -92,10 +92,11 @@ export const ModalEdit = ({ contact, modalHandler }) => {
                 <Input
                   {...register('number', {
                     required: 'Number is required',
-                    pattern:
-                      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-                    message:
-                      'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
+                    pattern: {
+                      value: /^\+?[0-9()\s-]{4,}$/,
+                      message:
+                        'Number must be digits and at least 4 characters',
+                    },
                   })}
                   type="tel"
                 />
@@ -128,6 +129,10 @@ export const ModalEdit = ({ contact, modalHandler }) => {
 };
 
 ModalEdit.propTypes = {
-  contact: PropTypes.object.isRequired,
+  contact: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }).isRequired,
   modalHandler: PropTypes.object.isRequired,
 };

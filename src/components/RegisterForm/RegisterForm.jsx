@@ -65,6 +65,7 @@ export const RegisterForm = () => {
                     required: 'Username is required',
                   })}
                   type="text"
+                  autoComplete=" "
                 />
                 <InputLeftElement
                   pointerEvents="none"
@@ -91,6 +92,7 @@ export const RegisterForm = () => {
                 <Input
                   {...register('email', { required: 'Email is required' })}
                   type="email"
+                  autoComplete="email"
                 />
                 <InputLeftElement
                   pointerEvents="none"
@@ -123,6 +125,7 @@ export const RegisterForm = () => {
                     },
                   })}
                   type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
                 />
                 <InputLeftElement
                   pointerEvents="none"

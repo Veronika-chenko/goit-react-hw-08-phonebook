@@ -12,10 +12,10 @@ export const FilterContacts = () => {
   };
 
   return (
-    <Stack w="300px" mb={5}>
+    <Stack w={{ base: '100%', md: '300px' }} mb={5}>
       <label htmlFor="filter">Find contacts by name</label>
       <Input
-        size="sm"
+        size="md"
         id="filter"
         type="text"
         value={filterValue}

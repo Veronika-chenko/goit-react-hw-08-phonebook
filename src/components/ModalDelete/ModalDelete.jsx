@@ -41,6 +41,10 @@ export const ModalDelete = ({ contact, modalHandler }) => {
 };
 
 ModalDelete.propTypes = {
-  contact: PropTypes.object.isRequired,
+  contact: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }).isRequired,
   modalHandler: PropTypes.object.isRequired,
 };

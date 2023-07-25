@@ -1,12 +1,19 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Flex, Heading, Spinner } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  Spinner,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectIsLoading } from 'redux/contacts/selectors';
 
 import { ContactList } from 'components/ContactList';
 import { FilterContacts } from 'components/FilterContacts';
 import { ContactForm } from 'components/ContactForm';
+import { PageTitle } from 'components/PageTitle';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -17,8 +24,11 @@ export default function Contacts() {
     dispatch(fetchContacts());
   }, [dispatch]);
 
+  const isBelowMd = useBreakpointValue({ base: true, md: false });
+
   return (
-    <>
+    <Box maxW={isBelowMd && '450px'} mx={isBelowMd && 'auto'}>
+      <PageTitle title="My Contacts" />
       <Heading as="h1" mb={5}>
         My Contacts
       </Heading>
@@ -30,6 +40,6 @@ export default function Contacts() {
         </Flex>
         <ContactList />
       </Box>
-    </>
+    </Box>
   );
 }
