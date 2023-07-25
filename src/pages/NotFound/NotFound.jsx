@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router-dom';
 import { Text } from '@chakra-ui/react';
+import { PageTitle } from 'components/PageTitle';
 
 export default function NotFound() {
   return (
     <>
+      <PageTitle title="NotFound" />
       <Text
         fontSize="xl"
         color="#ff001b"

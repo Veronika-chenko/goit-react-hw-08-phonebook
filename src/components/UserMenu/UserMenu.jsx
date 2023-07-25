@@ -8,8 +8,9 @@ export const UserMenu = () => {
 
   return (
     <>
-      <Flex align="center" gap={5}>
-        <Text fontSize="lg">Welcome, {user.name}</Text>
+      <Flex justify="space-between" align="center" gap={5} w={'100%'}>
+        <Text fontSize="lg">Welcome {user.name}</Text>
+
         <Button
           borderRadius="86% 14% 72% 28% / 44% 53% 47% 56%"
           _hover={{ boxShadow: '0px 4px 18px -2px #c3d0dd' }}

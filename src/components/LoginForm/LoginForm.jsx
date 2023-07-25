@@ -64,6 +64,7 @@ export const LoginForm = () => {
                 })}
                 id="email"
                 type="email"
+                autoComplete="email"
               />
               <InputLeftElement
                 pointerEvents="none"
@@ -97,6 +98,7 @@ export const LoginForm = () => {
                 })}
                 id="password"
                 type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
               />
               <InputLeftElement
                 pointerEvents="none"

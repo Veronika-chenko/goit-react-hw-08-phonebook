@@ -16,7 +16,7 @@ export const ContactItem = ({ contact }) => {
         justify="space-between"
         align="center"
         gap={6}
-        w="300px"
+        w={{ base: '100%', md: '300px' }}
         p={3}
         borderRadius="16px"
         boxShadow="0px 4px 18px -2px #c3d0dd"
@@ -55,5 +55,9 @@ export const ContactItem = ({ contact }) => {
 };
 
 ContactItem.propTypes = {
-  contact: PropTypes.object.isRequired,
+  contact: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }).isRequired,
 };

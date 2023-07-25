@@ -20,26 +20,33 @@ export const ContactForm = () => {
   };
 
   return (
-    <Box> 
-      <Stack width={300} as="form" gap={3} mb={4} onSubmit={handleSubmit(onSubmit)}>
+    <Box>
+      <Stack
+        w={{ base: '100%', md: '300px' }}
+        as="form"
+        gap={3}
+        mb={4}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Box pos="relative">
-          <FormLabel>Name</FormLabel>
+          <FormLabel htmlFor="name">Name</FormLabel>
           <Input
-            size="sm"
-            w="300px"
+            size="md"
+            id="name"
             {...register('name', {
               required: 'Name is required',
               pattern: {
                 value: /^[a-z A-Z]*$/,
-                message: 'Name must be letters'
+                message: 'Name must be letters',
               },
               minLength: {
                 value: 2,
-                message: 'Name should be at least 2 characters'
+                message: 'Name should be at least 2 characters',
               },
             })}
             type="text"
           />
+
           <Box position="absolute" bottom={-5}>
             {errors?.name && (
               <Text
@@ -53,21 +60,20 @@ export const ContactForm = () => {
           </Box>
         </Box>
         <Box pos="relative">
-          <FormLabel>Number</FormLabel>
+          <FormLabel htmlFor="number">Number</FormLabel>
           <Input
-            size="sm"
-            w="300px"
+            size="md"
+            id="number"
             {...register('number', {
               required: 'Number is required',
               pattern: {
-                value:
-                  /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-                message:
-                  'Number must be digits and at least 4 characters',
+                value: /^\+?[0-9()\s-]{4,}$/,
+                message: 'Number must be digits and at least 4 characters',
               },
             })}
             type="tel"
           />
+
           <Box position="absolute" bottom={-5}>
             {errors?.number && (
               <Text
@@ -80,7 +86,7 @@ export const ContactForm = () => {
             )}
           </Box>
         </Box>
-        <Button size="sm" w="300px" type="submit">
+        <Button size="md" type="submit">
           Add contact
         </Button>
       </Stack>

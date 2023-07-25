@@ -1,16 +1,14 @@
-## Contact Book React App ##
+## Contact Book React App
 
 **Description:**
 
-A simple phonebook connected to Swagger
-backend API - you can register, log in, add,
-remove or filter contacts, log out. I found
-out React core concepts and React
-environment
+A simple contact book connected to backend API. Users can register, log in, add,
+edit, remove or filter contacts, log out.
 
 **Technologies used:**
 
 **Base:**
+
 - React to create user interface elements
 - Redux-toolkit to write the Redux state management logic
 - React-redux to communicate the store with the components
